@@ -57,28 +57,49 @@ Library-Management-System/
 ```
 
 ---
+Got it 👍
+I’ve **fixed the clone link** and added a **direct code file link** so your README looks complete and professional.
+
+Below is your **updated README section with proper links** — you can replace your current one with this.
+
+---
 
 ## ▶️ How to Run the Program
 
-1. Clone the repository
+1. **Clone the repository**
 
 ```bash
-git clone [https://github.com/your-username/Library-management-system.git
+git clone https://github.com/shubhamsrivastav31/Library-management-system.git
+```
 
+2. **Navigate into the project folder**
 
-2. Compile the program
+```bash
+cd Library-management-system
+```
+
+3. **Compile the program**
 
 ```bash
 g++ library_management.cpp -o library
 ```
 
-3. Run the executable
+4. **Run the executable**
 
 ```bash
 ./library
 ```
 
 ---
+
+## 🔗 Project Links
+
+* 📂 **GitHub Repository:**
+  [https://github.com/shubhamsrivastav31/Library-management-system](https://github.com/shubhamsrivastav31/Library-management-system)
+
+* 📄 **C++ Source Code:**
+  [https://github.com/shubhamsrivastav31/Library-management-system/blob/main/library_management.cpp](https://github.com/shubhamsrivastav31/Library-management-system/blob/main/library_management.cpp)
+
 
 ## 🖥️ Sample Output
 
