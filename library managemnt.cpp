@@ -7,13 +7,9 @@
 #include <limits>
 
 using namespace std;
-
-// Forward declarations
 class Book;
 class Member;
 class Transaction;
-
-// Date class for handling dates
 class Date {
 private:
     int day, month, year;
