@@ -24,11 +24,9 @@ public:
     }
     
     Date addDays(int days) {
-        // Simplified date calculation (not handling month/year boundaries for simplicity)
         Date result = *this;
         result.day += days;
         
-        // Basic month overflow handling
         if (result.day > 30) {
             result.day -= 30;
             result.month++;
@@ -58,7 +56,6 @@ public:
     }
 };
 
-// Book class
 class Book {
 private:
     string ISBN;
@@ -72,7 +69,6 @@ public:
     Book(string isbn = "", string t = "", string a = "", string cat = "", int year = 2000)
         : ISBN(isbn), title(t), author(a), category(cat), isAvailable(true), publicationYear(year) {}
     
-    // Getters
     string getISBN() const { return ISBN; }
     string getTitle() const { return title; }
     string getAuthor() const { return author; }
@@ -80,7 +76,6 @@ public:
     bool getAvailability() const { return isAvailable; }
     int getPublicationYear() const { return publicationYear; }
     
-    // Setters
     void setAvailability(bool status) { isAvailable = status; }
     
     void display() const {
@@ -93,7 +88,6 @@ public:
         cout << "-----------------------------------" << endl;
     }
     
-    // Search helper functions
     bool matchesISBN(const string& isbn) const { return ISBN == isbn; }
     bool matchesTitle(const string& t) const { 
         string lowerTitle = title;
@@ -115,7 +109,6 @@ public:
     }
 };
 
-// Member class
 class Member {
 private:
     string memberID;
@@ -129,7 +122,6 @@ public:
     Member(string id = "", string n = "", string e = "", string p = "")
         : memberID(id), name(n), email(e), phone(p), maxBooksAllowed(5), booksBorrowed(0) {}
     
-    // Getters
     string getMemberID() const { return memberID; }
     string getName() const { return name; }
     string getEmail() const { return email; }
@@ -137,19 +129,16 @@ public:
     int getBooksBorrowed() const { return booksBorrowed; }
     int getMaxBooksAllowed() const { return maxBooksAllowed; }
     
-    // Check if member can borrow more books
     bool canBorrow() const {
         return booksBorrowed < maxBooksAllowed;
     }
     
-    // Increment borrowed books count
     void borrowBook() {
         if (canBorrow()) {
             booksBorrowed++;
         }
     }
     
-    // Decrement borrowed books count
     void returnBook() {
         if (booksBorrowed > 0) {
             booksBorrowed--;
@@ -166,7 +155,6 @@ public:
     }
 };
 
-// Transaction class
 class Transaction {
 private:
     string transactionID;
@@ -183,7 +171,6 @@ public:
         : transactionID(tid), bookISBN(isbn), memberID(mid), borrowDate(bd), dueDate(dd), 
           isReturned(false), fineAmount(0.0) {}
     
-    // Getters
     string getTransactionID() const { return transactionID; }
     string getBookISBN() const { return bookISBN; }
     string getMemberID() const { return memberID; }
@@ -193,15 +180,11 @@ public:
     bool getIsReturned() const { return isReturned; }
     double getFineAmount() const { return fineAmount; }
     
-    // Mark as returned and calculate fine if applicable
     void returnBook(Date returnDt) {
         isReturned = true;
         returnDate = returnDt;
         
-        // Calculate fine if returned after due date (fine: $1 per day)
         if (returnDate > dueDate) {
-            // Simplified calculation: assume 1 day difference per day after due
-            // In real implementation, calculate actual days difference
             fineAmount = 1.0; // Placeholder
         }
     }
@@ -222,7 +205,6 @@ public:
     }
 };
 
-// Library class to manage everything
 class Library {
 private:
     vector<Book> books;
@@ -230,7 +212,6 @@ private:
     vector<Transaction> transactions;
     int nextTransactionID;
     
-    // Helper functions
     Book* findBookByISBN(const string& isbn) {
         for (auto& book : books) {
             if (book.matchesISBN(isbn)) {
@@ -268,25 +249,21 @@ private:
     
 public:
     Library() : nextTransactionID(1001) {
-        // Add some sample data
         initializeSampleData();
     }
     
     void initializeSampleData() {
-        // Add sample books
         books.push_back(Book("978-0131103627", "The C Programming Language", "Brian Kernighan", "Programming", 1978));
         books.push_back(Book("978-0201633610", "Design Patterns", "Erich Gamma", "Computer Science", 1994));
         books.push_back(Book("978-0321714114", "C++ Primer", "Stanley Lippman", "Programming", 2012));
         books.push_back(Book("978-0596007126", "Head First Design Patterns", "Eric Freeman", "Computer Science", 2004));
         books.push_back(Book("978-0262033848", "Introduction to Algorithms", "Thomas Cormen", "Algorithms", 2009));
         
-        // Add sample members
         members.push_back(Member("MEM1001", "John Doe", "john@example.com", "123-456-7890"));
         members.push_back(Member("MEM1002", "Jane Smith", "jane@example.com", "234-567-8901"));
         members.push_back(Member("MEM1003", "Bob Johnson", "bob@example.com", "345-678-9012"));
     }
     
-    // Book management
     void addBook() {
         string isbn, title, author, category;
         int year;
@@ -296,7 +273,6 @@ public:
         cin.ignore();
         getline(cin, isbn);
         
-        // Check if book already exists
         if (findBookByISBN(isbn) != nullptr) {
             cout << "Error: Book with this ISBN already exists!" << endl;
             return;
@@ -383,7 +359,6 @@ public:
         }
     }
     
-    // Member management
     void addMember() {
         string id, name, email, phone;
         
@@ -392,7 +367,6 @@ public:
         cin.ignore();
         getline(cin, id);
         
-        // Check if member already exists
         if (findMemberByID(id) != nullptr) {
             cout << "Error: Member with this ID already exists!" << endl;
             return;
@@ -422,7 +396,6 @@ public:
         }
     }
     
-    // Borrow and return operations
     void borrowBook() {
         string memberID, bookISBN;
         
@@ -456,14 +429,12 @@ public:
             return;
         }
         
-        // Create transaction
         Date currentDate = Date::getCurrentDate();
-        Date dueDate = currentDate.addDays(14); // 14 days borrowing period
+        Date dueDate = currentDate.addDays(14); 
         
         Transaction transaction(generateTransactionID(), bookISBN, memberID, currentDate, dueDate);
         transactions.push_back(transaction);
         
-        // Update book and member status
         book->setAvailability(false);
         member->borrowBook();
         
@@ -498,11 +469,9 @@ public:
             return;
         }
         
-        // Update transaction
         Date returnDate = Date::getCurrentDate();
         transaction->returnBook(returnDate);
-        
-        // Update book and member status
+         
         book->setAvailability(true);
         member->returnBook();
         
@@ -545,7 +514,6 @@ public:
         }
     }
     
-    // Statistics
     void displayStatistics() {
         cout << "\n--- Library Statistics ---" << endl;
         cout << "Total Books: " << books.size() << endl;
@@ -568,7 +536,6 @@ public:
         cout << "Active Borrowings: " << activeTransactions << endl;
     }
     
-    // Main menu
     void displayMenu() {
         int choice;
         
@@ -611,8 +578,3 @@ int main() {
     library.displayMenu();
     return 0;
 }
-
-
-
-
-
