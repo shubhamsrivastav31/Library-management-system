@@ -1,7 +1,7 @@
 
-# 📚 Library Management System (C++ | OOP)
+#📚 Library Management System (C++ | OOP)
 
-## 📝 Description
+📝 Description
 
 The **Library Management System** is a beginner-level console application written in **C++ using Object-Oriented Programming (OOP)** concepts.
 This project helps manage basic library operations such as adding books, displaying records, issuing books, and returning books.
